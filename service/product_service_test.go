@@ -3,6 +3,7 @@ package service
 import (
 	"DTS/Chapter-3/chapter3-challenge3/entity"
 	"DTS/Chapter-3/chapter3-challenge3/repository"
+	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -54,6 +55,9 @@ func TestGetAllProduct_NotFound(t *testing.T) {
 
 func TestGetAllProduct_Found(t *testing.T) {
 
+	productRepo := &repository.ProductRepositoryMock{}
+	productService := ProductService{Repository: productRepo}
+
 	product := []*entity.Product{
 		{ID: uint(4), Title: "Handphone", Description: "Samsung J5"},
 		{ID: uint(5), Title: "Laptop", Description: "Lenovo Slim"},
@@ -63,6 +67,8 @@ func TestGetAllProduct_Found(t *testing.T) {
 	productRepo.Mock.On("FindAll").Return(product)
 
 	res, err := productService.GetAll()
+
+	log.Println(res)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
