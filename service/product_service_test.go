@@ -3,7 +3,6 @@ package service
 import (
 	"DTS/Chapter-3/chapter3-challenge3/entity"
 	"DTS/Chapter-3/chapter3-challenge3/repository"
-	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -67,8 +66,6 @@ func TestGetAllProduct_Found(t *testing.T) {
 	productRepo.Mock.On("FindAll").Return(product)
 
 	res, err := productService.GetAll()
-
-	log.Println(res)
 
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
